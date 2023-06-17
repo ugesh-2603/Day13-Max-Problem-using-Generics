@@ -5,51 +5,37 @@
         static void Main(string[] args)
         {
             Console.WriteLine(" Welcome to finding the maximum using Generics");
-            var intMaxTester = new MaximumTester<int>(5, 6, 3);
-            Console.WriteLine("Maximum of 5, 6, 3: " + intMaxTester.TestMaximum()); // 6
+            var intMaxTester = new MaximumTester<int>(5, 6, 3, 8, 2);
+            Console.WriteLine("Maximum of 5, 6, 3, 8, 2: " + intMaxTester.TestMaximum()); // 8
 
-            var floatMaxTester = new MaximumTester<float>(1.5f, 2.3f, 0.9f);
-            Console.WriteLine("Maximum of 1.5, 2.3, 0.9: " + floatMaxTester.TestMaximum()); // 2.3
+            var floatMaxTester = new MaximumTester<float>(1.5f, 2.3f, 0.9f, 3.4f, 0.2f);
+            Console.WriteLine("Maximum of 1.5, 2.3, 0.9, 3.4, 0.2: " + floatMaxTester.TestMaximum()); // 3.4
 
-            var stringMaxTester = new MaximumTester<string>("Apple", "Peach", "Banana");
-            Console.WriteLine("Maximum of Apple, Peach, Banana: " + stringMaxTester.TestMaximum()); // Peach
+            var stringMaxTester = new MaximumTester<string>("Apple", "Peach", "Banana", "Mango", "Orange");
+            Console.WriteLine("Maximum of Apple, Peach, Banana, Mango, Orange: " + stringMaxTester.TestMaximum()); // Peach
         }
-
     }
 
     public class MaximumTester<T> where T : IComparable<T>
     {
-        private T a;
-        private T b;
-        private T c;
+        private List<T> elements;
 
-        public MaximumTester(T a, T b, T c)
+        public MaximumTester(params T[] elements)
         {
-            this.a = a;
-            this.b = b;
-            this.c = c;
+            this.elements = new List<T>(elements);
         }
 
         public T TestMaximum()
         {
-            return FindMax(a, b, c);
+            return FindMax(elements.ToArray());
         }
 
-        public static T FindMax(T a, T b, T c)
+        public static T FindMax(params T[] elements)
         {
-            T max = a;
+            List<T> sortedElements = elements.ToList();
+            sortedElements.Sort();
 
-            if (b.CompareTo(max) > 0)
-            {
-                max = b;
-            }
-
-            if (c.CompareTo(max) > 0)
-            {
-                max = c;
-            }
-
-            return max;
+            return sortedElements.Last();
         }
     }
 }
