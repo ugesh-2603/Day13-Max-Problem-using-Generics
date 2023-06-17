@@ -5,15 +5,15 @@
         static void Main(string[] args)
         {
             Console.WriteLine(" Welcome to finding the maximum using Generics");
-            Console.WriteLine("Maximum of Apple, Peach, Blueberry:\t" + FindMax("Apple", "Peach", "Banana")); //Peach
-            Console.WriteLine("Maximum of Mango, Orange, Banana:\t" + FindMax("Mango", "Orange", "Berry")); //Orange
-            Console.WriteLine("Maximum of Pineapple, Guava, Cherry:\t" + FindMax("Pineapple", "Guava", "Cherry")); //Pineapple
-            Console.WriteLine("Maximum of Nine, Zero, Five:\t" + FindMax("Nine", "Zero", "Five")); //
+            Console.WriteLine("Maximum of 5, 6, 3:\t" + FindMax(5, 6, 3)); // 6
+            Console.WriteLine("Maximum of 1.5, 2.3, -0.9:\t" + FindMax(1.5f, 2.3f, -0.9f)); // 2.3
+            Console.WriteLine("Maximum of Apple, Peach, Banana:\t" + FindMax("Apple", "Peach", "Banana")); // Peach
         }
 
-        public static string FindMax(string a, string b, string c)
+        public static T FindMax<T>(T a, T b, T c) where T : IComparable<T>
         {
-            string max = a;
+            T max = a;
+
 
             if (b.CompareTo(max) > 0)
             {
@@ -24,6 +24,7 @@
             {
                 max = c;
             }
+
 
             return max;
         }
